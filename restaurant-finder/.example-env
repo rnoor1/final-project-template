@@ -1,0 +1,7 @@
+DBNAME=restaurant_finder
+DBHOST=localhost
+DBUSER=root
+DBPASS=your_password
+DBDRIVER=mysql
+
+YELP_API_KEY=your_yelp_api_key
