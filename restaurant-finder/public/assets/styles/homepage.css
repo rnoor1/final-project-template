@@ -9,7 +9,7 @@ body {
 
 /* Navbar Styles */
 .navbar {
-    background-color: #333;
+    background-color: #776060;
     color: #fff;
     padding: 15px 0;
     position: sticky;
@@ -115,7 +115,7 @@ body {
 }
 
 .search-box button:hover {
-    background-color: #f4a300;
+    background-color: #8a6824;
 }
 
 /* Featured Restaurants Styles */
@@ -162,12 +162,12 @@ body {
 
 .restaurant-card .card-content p {
     font-size: 1rem;
-    color: #cdb5b5;
+    color: #4e3a3a;
 }
 
 /* About Section */
 .about {
-    background-color: #fafafa;
+    background-color: #be8888;
     padding: 40px 20px;
     text-align: center;
 }
