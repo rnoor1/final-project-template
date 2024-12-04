@@ -6,13 +6,13 @@ use app\models\User;
 
 class UserController extends Controller {
 
-    // Render the login page
+    
     public function loginPage() {
         $pathToView = __DIR__ . '/../../public/views/users/login.html';
         $this->returnView($pathToView);
     }
 
-    // Handle login form submission
+    
     public function login() {
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $email = $_POST['email'] ?? '';
@@ -33,13 +33,13 @@ class UserController extends Controller {
         }
     }
 
-    // Render the registration page
+    
     public function registerPage() {
         $pathToView = __DIR__ . '/../../public/views/users/register.html';
         $this->returnView($pathToView);
     }
 
-    // Handle registration form submission
+    
     public function register() {
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $name = $_POST['name'] ?? '';
@@ -63,7 +63,7 @@ class UserController extends Controller {
         }
     }
 
-    // Log out the user
+    
     public function logout() {
         session_destroy();
         header('Location: ?route=users/login');

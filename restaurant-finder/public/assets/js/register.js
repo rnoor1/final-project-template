@@ -6,7 +6,7 @@ document.getElementById('register-form').addEventListener('submit', function(e) 
     const password = e.target.password.value;
     const confirmPassword = e.target.confirm_password.value;
 
-    // Validate the form fields
+    
     if (!username || !email || !password || !confirmPassword) {
         alert("All fields are required.");
         return;
@@ -17,7 +17,7 @@ document.getElementById('register-form').addEventListener('submit', function(e) 
         return;
     }
 
-    // If form is valid, send data to backend
+    
     fetch('/user/register', {
         method: 'POST',
         headers: {
@@ -29,9 +29,9 @@ document.getElementById('register-form').addEventListener('submit', function(e) 
     .then(data => {
         if (data.success) {
             alert('Registration successful! Please log in.');
-            window.location.href = '/login'; // Redirect to login after successful registration
+            window.location.href = '/login'; 
         } else {
-            alert(data.message); // Show error message from backend
+            alert(data.message); 
         }
     })
     .catch(error => {

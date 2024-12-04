@@ -162,7 +162,7 @@ body {
 
 .restaurant-card .card-content p {
     font-size: 1rem;
-    color: #555;
+    color: #cdb5b5;
 }
 
 /* About Section */
@@ -196,7 +196,7 @@ body {
 }
 
 .contact button {
-    background-color: #f4b400;
+    background-color: #e1af27;
     color: white;
     padding: 15px;
     font-size: 1rem;
@@ -211,8 +211,8 @@ body {
 
 /* Footer */
 footer {
-    background-color: #333;
-    color: #fff;
+    background-color: #c09292;
+    color: #ab9696;
     padding: 15px 0;
     text-align: center;
 }

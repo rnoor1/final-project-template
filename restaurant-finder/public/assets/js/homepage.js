@@ -1,4 +1,4 @@
-// Wait until the DOM is fully loaded
+
 document.addEventListener("DOMContentLoaded", () => {
     const restaurantListContainer = document.getElementById("restaurant-list");
     const searchInput = document.getElementById("search");
@@ -6,7 +6,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const detailsContainer = document.getElementById("restaurant-details");
     const apiUrl = "/api/restaurants";
 
-    // Fetch and display the list of restaurants
+    
     const fetchRestaurants = async () => {
         try {
             const response = await fetch(apiUrl);
@@ -23,7 +23,7 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     };
 
-    // Display restaurants in the list container
+    
     const displayRestaurants = (restaurants) => {
         restaurantListContainer.innerHTML = restaurants.map((restaurant) => `
             <div class="restaurant-card">
@@ -35,7 +35,7 @@ document.addEventListener("DOMContentLoaded", () => {
         `).join("");
     };
 
-    // Search restaurants by name
+    
     const searchRestaurants = async () => {
         const query = searchInput.value.trim().toLowerCase();
         try {
@@ -48,7 +48,7 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     };
 
-    // Filter restaurants by category
+    
     const filterRestaurants = async () => {
         const category = filterCategory.value;
         try {
@@ -61,7 +61,7 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     };
 
-    // Handle "View Details" button click
+    
     restaurantListContainer.addEventListener("click", async (event) => {
         if (event.target.classList.contains("view-details")) {
             const restaurantId = event.target.dataset.id;
@@ -77,7 +77,7 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     });
 
-    // Display restaurant details
+    
     const showRestaurantDetails = (details) => {
         detailsContainer.innerHTML = `
             <h2>${details.name}</h2>
@@ -88,17 +88,17 @@ document.addEventListener("DOMContentLoaded", () => {
         `;
         detailsContainer.style.display = "block";
 
-        // Close button functionality
+       
         document.getElementById("close-details").addEventListener("click", () => {
             detailsContainer.style.display = "none";
         });
     };
 
-    // Event listeners for search and filter inputs
+    
     searchInput.addEventListener("input", searchRestaurants);
     filterCategory.addEventListener("change", filterRestaurants);
 
-    // Initialize by fetching the list of restaurants
+    
     fetchRestaurants();
 });
 

@@ -3,19 +3,19 @@
 namespace app\models;
 
 class Restaurant extends Model {
-    protected $table = 'restaurants';  // Define the table name for restaurants
+    protected $table = 'restaurants';  
 
-    // Get all restaurants
+    
     public function getAllRestaurants() {
-        return $this->findAll();  // Inherited from Model.php
+        return $this->findAll();  
     }
 
-    // Get restaurant details by ID
+    
     public function getRestaurantById($id) {
-        return $this->findById($id);  // Inherited from Model.php
+        return $this->findById($id);  
     }
 
-    // Add a new restaurant
+    
     public function addRestaurant($name, $location, $cuisine) {
         $query = "INSERT INTO $this->table (name, location, cuisine) VALUES (:name, :location, :cuisine)";
         $stmt = $this->db->prepare($query);

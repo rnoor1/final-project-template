@@ -11,19 +11,19 @@ class Router {
 
     public function __construct() {
         $this->urlArray = $this->routeSplit();
-        $this->handleMainRoutes();       // Handle homepage route
-        $this->handleUserRoutes();       // Handle user-related API routes
-        $this->handleRestaurantRoutes(); // Handle restaurant-related API routes
-        $this->handleViewRoutes();       // Handle HTML view routes
+        $this->handleMainRoutes();       
+        $this->handleUserRoutes();       
+        $this->handleRestaurantRoutes(); 
+        $this->handleViewRoutes();      
     }
 
-    // Split the URL into an array for easy parsing
+    
     protected function routeSplit() {
         $removeQueryParams = strtok($_SERVER["REQUEST_URI"], '?'); // Remove query string
         return explode("/", $removeQueryParams);
     }
 
-    // Handle the main route (homepage)
+    
     protected function handleMainRoutes() {
         if ($this->urlArray[1] === '' && $_SERVER['REQUEST_METHOD'] === 'GET') {
             $mainController = new MainController();
@@ -31,7 +31,7 @@ class Router {
         }
     }
 
-    // Handle user-related routes (GET, POST, DELETE)
+    
     protected function handleUserRoutes() {
         if ($this->urlArray[1] === 'api' && $this->urlArray[2] === 'users') {
             $userController = new UserController();
@@ -50,7 +50,7 @@ class Router {
         }
     }
 
-    // Handle restaurant-related routes (GET, POST)
+    
     protected function handleRestaurantRoutes() {
         if ($this->urlArray[1] === 'api' && $this->urlArray[2] === 'restaurants') {
             $restaurantController = new RestaurantController();
@@ -67,7 +67,7 @@ class Router {
         }
     }
 
-    // Handle HTML view routes (e.g., views for restaurants or users)
+    
     protected function handleViewRoutes() {
         if ($this->urlArray[1] === 'views' && $this->urlArray[2] === 'restaurants') {
             if ($this->urlArray[3] === 'listView.html') {
