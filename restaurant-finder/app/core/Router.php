@@ -7,15 +7,14 @@ use app\controllers\UserController;
 use app\controllers\RestaurantController;
 
 class Router {
-
     public $urlArray;
 
     public function __construct() {
         $this->urlArray = $this->routeSplit();
-        $this->handleMainRoutes();      // Handle homepage route
-        $this->handleUserRoutes();      // Handle user-related API routes
+        $this->handleMainRoutes();       // Handle homepage route
+        $this->handleUserRoutes();       // Handle user-related API routes
         $this->handleRestaurantRoutes(); // Handle restaurant-related API routes
-        $this->handleViewRoutes();      // Handle HTML view routes
+        $this->handleViewRoutes();       // Handle HTML view routes
     }
 
     // Split the URL into an array for easy parsing
@@ -37,7 +36,7 @@ class Router {
         if ($this->urlArray[1] === 'api' && $this->urlArray[2] === 'users') {
             $userController = new UserController();
 
-            if ($_SERVER['REQUEST_METHOD'] === 'GET') {
+            if ($_SERVER['REQUEST_METHOD'] === 'GET' && isset($this->urlArray[3]) && $this->urlArray[3] === 'profile') {
                 $userController->profile(); // Fetch user profile
             } elseif ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 if ($this->urlArray[3] === 'register') {
@@ -45,13 +44,13 @@ class Router {
                 } elseif ($this->urlArray[3] === 'login') {
                     $userController->login(); // Log in user
                 }
-            } elseif ($_SERVER['REQUEST_METHOD'] === 'DELETE') {
+            } elseif ($_SERVER['REQUEST_METHOD'] === 'DELETE' && isset($this->urlArray[3]) && $this->urlArray[3] === 'delete') {
                 $userController->deleteUser(); // Delete user
             }
         }
     }
 
-    // Handle restaurant-related routes
+    // Handle restaurant-related routes (GET, POST)
     protected function handleRestaurantRoutes() {
         if ($this->urlArray[1] === 'api' && $this->urlArray[2] === 'restaurants') {
             $restaurantController = new RestaurantController();

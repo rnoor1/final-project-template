@@ -3,29 +3,50 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Restaurant Finder - Login</title>
-    <link rel="stylesheet" href="/assets/css/style.css"> <!-- Link to your styles -->
+    <title>Login</title>
+    <link rel="stylesheet" href="/assets/styles/homepage.css">
 </head>
 <body>
-    <div class="container">
-        <h2>Login</h2>
-        <form id="login-form">
-            <div class="form-group">
-                <label for="email">Email</label>
-                <input type="email" id="email" name="email" placeholder="Enter your email" required>
-            </div>
 
-            <div class="form-group">
-                <label for="password">Password</label>
-                <input type="password" id="password" name="password" placeholder="Enter your password" required>
-            </div>
+    <header>
+        <h1>Login</h1>
+    </header>
+
+    <div class="container">
+        <form id="login-form">
+            <label for="username">Username:</label>
+            <input type="text" id="username" name="username" required><br><br>
+
+            <label for="password">Password:</label>
+            <input type="password" id="password" name="password" required><br><br>
 
             <button type="submit">Login</button>
         </form>
-
-        <p>Don't have an account? <a href="/register">Register</a></p>
     </div>
 
-    <script src="/assets/js/login.js"></script> <!-- Add your JavaScript for form submission -->
+    <script>
+        document.getElementById('login-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+
+            const username = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
+
+            fetch('/login', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded',
+                },
+                body: `username=${username}&password=${password}`,
+            })
+            .then(response => response.json())
+            .then(data => {
+                alert(data.message);
+                if (data.message === 'Login successful!') {
+                    window.location.href = '/';
+                }
+            });
+        });
+    </script>
+
 </body>
 </html>

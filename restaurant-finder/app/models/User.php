@@ -1,34 +1,72 @@
 <?php
 
-namespace app\models;
+namespace app\controllers;
 
-use PDO;
+use app\models\User;
 
-class User {
+class UserController extends Controller {
 
-    public function registerUser($username, $email, $password) {
-        $query = "SELECT * FROM users WHERE email = :email";
-        $stmt = DB_CONNECTION->prepare($query);
-        $stmt->bindParam(':email', $email);
-        $stmt->execute();
-
-        if ($stmt->rowCount() > 0) {
-            return false; // User already exists
-        }
-
-        $query = "INSERT INTO users (username, email, password) VALUES (:username, :email, :password)";
-        $stmt = DB_CONNECTION->prepare($query);
-        $stmt->bindParam(':username', $username);
-        $stmt->bindParam(':email', $email);
-        $stmt->bindParam(':password', $password);
-        return $stmt->execute();
+    // Render the login page
+    public function loginPage() {
+        $pathToView = __DIR__ . '/../../public/views/users/login.html';
+        $this->returnView($pathToView);
     }
 
-    public function getUserByEmail($email) {
-        $query = "SELECT * FROM users WHERE email = :email";
-        $stmt = DB_CONNECTION->prepare($query);
-        $stmt->bindParam(':email', $email);
-        $stmt->execute();
-        return $stmt->fetch(PDO::FETCH_ASSOC);
+    // Handle login form submission
+    public function login() {
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            $email = $_POST['email'] ?? '';
+            $password = $_POST['password'] ?? '';
+
+            $userModel = new User();
+            $user = $userModel->getUserByEmail($email);
+
+            if ($user && password_verify($password, $user['password'])) {
+                $_SESSION['user_id'] = $user['id'];
+                $_SESSION['user_name'] = $user['name'];
+                header('Location: ?route=home');
+                exit();
+            } else {
+                $this->returnView(__DIR__ . '/../../public/views/users/login.html');
+                echo "<script>alert('Invalid credentials. Please try again.');</script>";
+            }
+        }
+    }
+
+    // Render the registration page
+    public function registerPage() {
+        $pathToView = __DIR__ . '/../../public/views/users/register.html';
+        $this->returnView($pathToView);
+    }
+
+    // Handle registration form submission
+    public function register() {
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            $name = $_POST['name'] ?? '';
+            $email = $_POST['email'] ?? '';
+            $password = $_POST['password'] ?? '';
+
+            if ($name && $email && $password) {
+                $userModel = new User();
+                $hashedPassword = password_hash($password, PASSWORD_BCRYPT);
+                $result = $userModel->createUser($name, $email, $hashedPassword);
+
+                if ($result) {
+                    header('Location: ?route=users/login');
+                    exit();
+                } else {
+                    echo "<script>alert('Registration failed. Email might already be in use.');</script>";
+                }
+            } else {
+                echo "<script>alert('All fields are required.');</script>";
+            }
+        }
+    }
+
+    // Log out the user
+    public function logout() {
+        session_destroy();
+        header('Location: ?route=users/login');
+        exit();
     }
 }

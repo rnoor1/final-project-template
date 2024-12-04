@@ -3,27 +3,19 @@
 namespace app\controllers;
 
 class MainController extends Controller {
-
+    
+    // Render the homepage
     public function homepage() {
-        $userAQModel = new \app\models\User();
-        $data = $userAQModel->getSavedUserAQData();
-    
-        ob_start();
-        //include './assets/views/main/homepage.html';
-        include $_SERVER['DOCUMENT_ROOT'] . '/assets/views/main/homepage.html';
-
-        $content = ob_get_clean();
-    
-        include $_SERVER['DOCUMENT_ROOT'] . '/assets/views/main/homepage.html';
-        // Now pass the $data into your view
-       // include './assets/views/main/homepage.php';  // If you have a .php version to handle data
-        exit();
+        $pathToView = __DIR__ . '/../../public/views/main/homepage.html';
+        $this->returnView($pathToView);
     }
 
-    public function notFound() {
-        http_response_code(404);
-        echo json_encode(['error' => 'Page not found']);
-        exit();
+    // Example: Handle an API request and return JSON
+    public function apiExample() {
+        $data = [
+            'status' => 'success',
+            'message' => 'Welcome to the Restaurant Finder API!'
+        ];
+        $this->returnJSON($data);
     }
-
 }
