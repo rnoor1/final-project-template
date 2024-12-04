@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Menu - Foodzy</title>
+    <style>
+        /* Navigation Bar */
+        .nav_bar {
+            background-color: #912d2df1;
+            height: 80px;
+            width: 90%;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 5%;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .logo {
+            color: white;
+            font-size: 30px;
+        }
+
+        .nav_bar ul {
+            list-style: none;
+            display: flex;
+        }
+
+        .nav_bar ul li {
+            padding: 20px 30px;
+        }
+
+        .nav_bar ul li a {
+            color: rgb(206, 191, 191);
+            text-decoration: none;
+            font-size: 20px;
+        }
+
+        .nav_bar ul li a:hover {
+            color: #d1dad2;
+        }
+
+        /* Menu Section */
+        .menu-container {
+            padding: 30px;
+            max-width: 1200px;
+            margin: auto;
+        }
+
+        .restaurant-section {
+            margin-bottom: 50px;
+            text-align: center;
+        }
+
+        .restaurant-name {
+            font-size: 2rem;
+            margin-bottom: 10px;
+            color: #4a4a4a;
+        }
+
+        .restaurant-cuisine {
+            font-size: 1.2rem;
+            margin-bottom: 20px;
+            color: #787878;
+        }
+
+        .menu-image {
+            max-width: 100%;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .menu-image:hover {
+            transform: scale(1.05);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Footer */
+        footer {
+            background-color: #9b4141;
+            color: rgb(238, 231, 231);
+            text-align: center;
+            padding: 15px 0;
+            margin-top: 30px;
+        }
+
+        footer p {
+            margin: 0;
+            font-size: 0.875rem;
+        }
+
+        @media (max-width: 768px) {
+            .menu-container {
+                padding: 20px;
+            }
+
+            .restaurant-name {
+                font-size: 1.5rem;
+            }
+
+            .nav_bar ul li a {
+                font-size: 18px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <div class="nav_bar">
+        <h1 class="logo">Foodzy</h1>
+        <ul>
+            <li><a href="homepage.html">Home</a></li>
+            <li><a href="menu.html">Menu</a></li>
+            <li><a href="review.html">Review</a></li>
+        </ul>
+    </div>
+
+    <!-- Menu Section -->
+    <div class="menu-container" id="menu-container">
+        <!-- Dynamic restaurant data will be inserted here -->
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2024 Foodzy. All Rights Reserved.</p>
+    </footer>
+
+    <script>
+        // Restaurant Data
+        const restaurants = [
+            { name: "Sushi World", cuisine: "Sushi" },
+            { name: "Pizza Palace", cuisine: "Italian" },
+            { name: "Burger Haven", cuisine: "American" },
+            { name: "Taco Fiesta", cuisine: "Mexican" },
+            { name: "Curry Corner", cuisine: "Indian" },
+            { name: "Pasta Place", cuisine: "Italian" },
+            { name: "The Green Bowl", cuisine: "Vegan" },
+            { name: "Dim Sum Delight", cuisine: "Chinese" },
+            { name: "Steakhouse Grill", cuisine: "Steak" },
+            { name: "Pho Corner", cuisine: "Vietnamese" }
+        ];
+
+        // Menu Images (one image per restaurant)
+        const menuImages = {
+            "Sushi World": "https://www.21sushihouse.com/wp-content/uploads/2023/11/05-21SushiMenu-2023.jpg",
+            "Pizza Palace": "https://d3jmn01ri1fzgl.cloudfront.net/photoadking/webp_thumbnail/delicious-pizza-menu-template-a6irpb764d3453.webp",
+            "Burger Haven": " https://www.chargerburger.com/wp-content/uploads/2019/09/charger-burger-menu.jpg",
+            "Taco Fiesta": "https://img1.wsimg.com/isteam/ip/99a37026-2177-4032-8fdd-337720e2e57c/TA-Digital-Menu-07-ff38663.jpg/:/ ",
+            "Curry Corner": "https://www.indianbrasserierestaurant.co.uk/wp-content/uploads/2022/02/Indian-Brasserie-Slim-Inserts-2022-6.jpg",
+            "Pasta Place": " https://d3jmn01ri1fzgl.cloudfront.net/photoadking/webp_thumbnail/pasta-menu-template-bl7huq4d8ebb30.webp  ",
+            "The Green Bowl": " https://i.pinimg.com/originals/53/24/75/5324759d78506730482ac1a505bbc5d2.png   ",
+            "Dim Sum Delight": "https://static.wixstatic.com/media/e62c8b_334b81c1db544716818dcb42fe98ce95~mv2.jpg/v1/fill/w_560,h_922,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/Maui%20Pho%20Menu%20Web%20Menu%202024-01.jpg ",
+            "Steakhouse Grill": "https://images.squarespace-cdn.com/content/v1/65021b88ba676e38663f648a/e4e95f4f-e4e0-4c14-9c34-b151150cdc5c/Screen+Shot+2024-08-19+at+3.00.11+PM.png",
+            "Pho Corner": "https://images.squarespace-cdn.com/content/v1/58a72a4be4fcb5994e28dcaf/26bb844d-56d3-4bf8-8bc5-2ee0b28334e5/Nhu-Menu+TV+DOWNTOWN+LA+PHO+%28Brown%29+2022-03.JPG"
+        };
+
+        const menuContainer = document.getElementById("menu-container");
+
+        // Populate Menu
+        restaurants.forEach(restaurant => {
+            const section = document.createElement("div");
+            section.className = "restaurant-section";
+
+            const restaurantName = document.createElement("h2");
+            restaurantName.className = "restaurant-name";
+            restaurantName.textContent = restaurant.name;
+
+            const restaurantCuisine = document.createElement("p");
+            restaurantCuisine.className = "restaurant-cuisine";
+            restaurantCuisine.textContent = `Cuisine: ${restaurant.cuisine}`;
+
+            const menuImage = document.createElement("img");
+            menuImage.className = "menu-image";
+            menuImage.src = menuImages[restaurant.name];
+            menuImage.alt = `${restaurant.name} Menu`;
+
+            section.appendChild(restaurantName);
+            section.appendChild(restaurantCuisine);
+            section.appendChild(menuImage);
+            menuContainer.appendChild(section);
+        });
+    </script>
+</body>
+</html>
